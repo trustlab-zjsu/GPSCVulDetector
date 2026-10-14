@@ -1,55 +1,57 @@
 # GPSCVulDetector
 
-This repo is a python implementation of smart contract vulnerability detection of our method (CGE). 
-Here, we explore combining graph neural networks with expert knowledge for smart contract vulnerability detection.
+This repo is a python implementation of combining graph neural network with expert knowledge for smart contract vulnerability detection. 
+
+## Citation
+Please use this citation in your paper if you refer to our [paper](https://ieeexplore.ieee.org/abstract/document/9477066/) or code.
+```
+@article{liu2023combining,
+  title={Combining Graph Neural Networks With Expert Knowledge for Smart Contract Vulnerability Detection},
+  author={Liu, Zhenguang and Qian, Peng and Wang, Xiaoyang and Zhuang, Yuan and Qiu, Lin and Wang, Xun},
+  journal={IEEE Transactions on Knowledge \& Data Engineering},
+  volume={35},
+  number={02},
+  pages={1296--1310},
+  year={2023},
+  publisher={IEEE Computer Society}
+}
+``` 
 
 ## Requirements
 
 ### Required Packages
-* **python**3 or above
+* **python** 3+
 * **TensorFlow** 2.0
-* **sklearn** for model evaluation
+* **numpy** 1.18.2
+* **sklearn** 0.20.2
 
 Run the following script to install the required packages.
 ```shell
 pip install --upgrade pip
 pip install tensorflow==2.0
-pip install scikit-learn
+pip install numpy==1.18.2
+pip install scikit-learn==0.20.2
 ```
 
-### Dataset
-#### Dataset structure in this project
-Here, we present the dataset structure in our project, including the graph feature and pattern feature.
 
-```shell
-${GPSCVulDetector}
-├── data
-│   ├── loops
-│   ├── timestamp
-│   └── reentrancy
-├── graph_feature
-│   ├── loops
-│   ├── timestamp
-│   └── reentrancy
-└── pattern_feature
-    ├── feature_by_fc
-    ├── feature_by_zeropadding
-    └── label_by_extractor
-```
+## Graph extractor & Pattern extractor
+1. **Graph:** The contract graph and its feature are extracted by the automatic graph extractor in the `graph_extractor_example` directory (or refer to our [previous methods](https://github.com/Messi-Q/GNNSCVulDetector)).
+2. **Pattern:** The expert pattern and its feature are extracted by the automatic pattern extractor in the `pattern_extractor_example` directory.  
 
-**Note:** 
-The graph feature of related smart contract is extracted by our [previous methods](https://github.com/Messi-Q/GNNSCVulDetector) published on the IJCAI 2020.
-The pattern feature of related smart contract is extracted by the tools in the category `pattern_extractor`.  
+
+Notably, you can also use the features extracted in [AMEVulDetector](https://github.com/Messi-Q/AMEVulDetector).
+
+If any question, please email to messi.qp711@gmail.com.
 
 
 ## Running Project
-* To run program, use this command: python GPSCVulDetector.py.
-* Also, you can use specific hyper-parameters to train the model. All the hyper-parameters can be found in `parser.py`.
+* To run program, please use this command: python3 GPSCVulDetector.py.
+* Also, you can set specific hyperparameters, and all the hyperparameters can be found in `parser.py`.
 
 Examples:
 ```shell
-python GPSCVulDetector.py
-python GPSCVulDetector.py --model EncoderConv1D --lr 0.002 --dropout 0.2 --epochs 50 --batch_size 32
+python3 GPSCVulDetector.py
+python3 GPSCVulDetector.py --model CGE --lr 0.002 --dropout 0.2 --epochs 100 --batch_size 32
 ```
 
 ## References
@@ -65,4 +67,14 @@ python GPSCVulDetector.py --model EncoderConv1D --lr 0.002 --dropout 0.2 --epoch
   year      = {2020},
 }
 
+```
+2. Towards Automated Reentrancy Detection for Smart Contracts Based on Sequential Models. IEEE Access. [ReChecker](https://github.com/Messi-Q/ReChecker).
+```
+@article{qian2020towards,
+  title={Towards Automated Reentrancy Detection for Smart Contracts Based on Sequential Models},
+  author={Qian, Peng and Liu, Zhenguang and He, Qinming and Zimmermann, Roger and Wang, Xun},
+  journal={IEEE Access},
+  year={2020},
+  publisher={IEEE}
+}
 ```
